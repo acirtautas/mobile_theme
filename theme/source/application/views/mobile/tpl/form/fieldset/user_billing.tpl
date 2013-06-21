@@ -184,8 +184,8 @@
                 <ul class="nav nav-pills nav-justified datepicker-container">
                     <li id="month">
                         <button class="btn" type="button">+</button>
-                        <input name="invadr[oxuser__oxbirthdate][month]" type="hidden" value="[{if $iBirthdayMonth > 0 }][{$iBirthdayMonth }][{/if}]"/>
-                        <input placeholder="[{ oxmultilang ident="MONTH" }]" type="text" readonly/>
+                        <input data-fieldsize="xsmall" id="oxMonth" maxlength="2" name="invadr[oxuser__oxbirthdate][month]" placeholder="[{ oxmultilang ident="MONTH" }]" type="number" value="[{if $iBirthdayMonth > 0 }][{$iBirthdayMonth }][{/if}]" class="datepicker-month-number"/>
+                        <input placeholder="[{ oxmultilang ident="MONTH" }]" type="text" class="datepicker-month-text" readonly/>
                         <button class="btn" type="button">-</button>
                     </li>
                     <li id="day">

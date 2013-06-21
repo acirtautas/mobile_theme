@@ -22,6 +22,7 @@
 
     oxDatePicker = {
         options: {
+            sDatePickerId:  'datePicker',
             sDayId:         'day',
             sMonthId:       'month',
             sYearId:        'year',
@@ -38,6 +39,11 @@
                 iDay = $( "#" + options.sDayId + " input" ).val(),
                 iMonth = $( "#" + options.sMonthId + " input" ).val(),
                 iYear = $( "#" + options.sYearId + " input" ).val();
+
+            // display/hide elements for javascript support
+            $( "#" + options.sMonthId + " input.datepicker-month-text" ).show();
+            $( "#" + options.sMonthId + " input.datepicker-month-number" ).hide();
+            $( "#" + options.sDatePickerId + " button.btn" ).show();
 
             self.setGivenDate( iYear, iMonth, iDay );
 
@@ -235,8 +241,8 @@
          * @param iVal
          */
         updateMonthField: function( iVal ) {
-            $( "#" + this.options.sMonthId + " input:not([readonly])" ).val( iVal + 1 );
-            $( "#" + this.options.sMonthId + " input[readonly]" ).val( this.getMonthName( iVal + 1 ) );
+            $( "#" + this.options.sMonthId + " input.datepicker-month-number" ).val( iVal + 1 );
+            $( "#" + this.options.sMonthId + " input.datepicker-month-text" ).val( this.getMonthName( iVal + 1 ) );
         },
 
         /**
@@ -255,7 +261,7 @@
          */
         updateMonthShownField: function( oDate ) {
             if ( oDate ) {
-                $( "#" + this.options.sMonthId + " input[readonly]" ).val( this.getMonthName( oDate.getMonth() + 1 ) );
+                $( "#" + this.options.sMonthId + " input.datepicker-month-text" ).val( this.getMonthName( oDate.getMonth() + 1 ) );
             }
         },
 

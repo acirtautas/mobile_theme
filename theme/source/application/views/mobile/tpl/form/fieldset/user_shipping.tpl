@@ -42,7 +42,7 @@
     </li>
 [{/if}]
 <li>
-    <ul id="shippingAddressForm" class="form" [{if $delivadr }]style="display: none;"[{/if}]>
+    <ul id="shippingAddressForm" class="form">
         <li>
               [{include file="form/fieldset/salutation.tpl" name="deladr[oxaddress__oxsal]" value=$delivadr->oxaddress__oxsal->value value2=$deladr.oxaddress__oxsal }]
         </li>
@@ -167,6 +167,10 @@
             [{/if}]
         </li>
     </ul>
+    [{oxscript add="$('#shippingAddressText').show();"}]
+    [{if $delivadr }]
+        [{oxscript add="$('#shippingAddressForm').hide();"}]
+    [{/if}]
 </li>
 [{if !$noFormSubmit}]
     <li class="alert alert-block">[{ oxmultilang ident="FORM_USER_COMPLETEMARKEDFIELDS" }]</li>

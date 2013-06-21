@@ -25,15 +25,17 @@
                                     <input class="btn" type="button" id="userChangeAddress" name="changeBillAddress" value="[{oxmultilang ident="PAGE_CHECKOUT_BASKET_CHANGE" }]" />
                                 </li>
                             </ul>
+                            [{oxscript add="$('#userChangeAddress').show();"}]
                             [{oxscript add="$('#userChangeAddress').click( function() { $('#addressForm').show();$('#addressText').hide();$('#userChangeAddress').hide();return false;});"}]
                             [{if $aErrors}]
                                 [{oxscript add="$(document).ready(function(){ $('#userChangeAddress').trigger('click');});"}]
                             [{/if}]
                         [{/block}]
                         [{block name="user_checkout_billing_form"}]
-                            <ul id="addressForm" class="form" style="display: none;">
+                            <ul id="addressForm" class="form">
                                 [{include file="form/fieldset/user_billing.tpl" noFormSubmit=true blSubscribeNews=true blOrderRemark=true}]
                             </ul>
+                            [{oxscript add="$('#addressForm').hide();"}]
                         [{/block}]
                         [{block name="user_checkout_billing_feedback"}]
                             <ul id="addressText" class="form">
@@ -41,6 +43,7 @@
                                     [{include file="widget/address/billing_address.tpl" noFormSubmit=true blSubscribeNews=true blOrderRemark=true}]
                                 </li>
                             </ul>
+                            [{oxscript add="$('#addressText').show();"}]
                         [{/block}]
                     [{/block}]
                 </div>
@@ -50,25 +53,34 @@
                             <ul class="form">
                                 <li>
                                     <h3>[{ oxmultilang ident="FORM_REGISTER_SHIPPINGADDRESS" }]</h3>
+                                </li>
+                            </ul>
+                        [{/block}]
+                        [{block name="user_checkout_shipping_change"}]
+                            <ul class="form">
+                                <li>
+                                    <div class="checkbox">
+                                        <input id="showShipAddress" type="checkbox" name="blshowshipaddress" [{if !$oView->showShipAddress()}]checked[{/if}] value="0">
+                                        <label for="showShipAddress" class="glyphicon-ok"></label>
+                                    </div>
+                                    <label for="showShipAddress">[{ oxmultilang ident="USE_BILLINGADDRESS_FOR_SHIPPINGADDRESS" }]</label>
+                                </li>
+                                <li>
                                     <input class="btn" type="button" id="userChangeShippingAddress" name="changeShippingAddress" [{if !$oView->showShipAddress() or !$oxcmp_user->getSelectedAddress()}] [{/if}] value="[{ oxmultilang ident="PAGE_CHECKOUT_BASKET_CHANGE" }]"/>
                                 </li>
                             </ul>
+                            [{oxscript add="$('#showShipAddress').change( function() { $('#shippingAddress').toggle($(this).is(':not(:checked)'));});"}]
                             [{oxscript add="$('#showShipAddress').change(function() { $('#userChangeShippingAddress').toggle($(this).is(':not(:checked)') && $('#addressId').val() != -1 ); }); "}]
                             [{oxscript add="$('#addressId').change(function() { $('#userChangeShippingAddress').toggle($('#addressId').val() != -1 ); }); "}]
-                        [{/block}]
-                        [{block name="user_checkout_shipping_change"}]
-                            <div class="checkbox">
-                                <input id="showShipAddress" type="checkbox" name="blshowshipaddress" [{if !$oView->showShipAddress()}]checked[{/if}] value="0">
-                                <label for="showShipAddress" class="glyphicon-ok"></label>
-                            </div>
-                            <label for="showShipAddress">[{ oxmultilang ident="USE_BILLINGADDRESS_FOR_SHIPPINGADDRESS" }]</label>
-                            <div class="clearfix"></div>
-                            [{oxscript add="$('#showShipAddress').change( function() { $('#shippingAddress').toggle($(this).is(':not(:checked)'));});"}]
+                            [{oxscript add="$('#userChangeShippingAddress').show();"}]
                         [{/block}]
                         [{block name="user_checkout_shipping_form"}]
-                            <ul id="shippingAddress" class="form" [{if !$oView->showShipAddress()}]style="display: none;"[{/if}]>
+                            <ul id="shippingAddress" class="form">
                                 [{include file="form/fieldset/user_shipping.tpl" noFormSubmit=true onChangeClass='user'}]
                             </ul>
+                            [{if !$oView->showShipAddress()}]
+                                [{oxscript add="$('#shippingAddress').hide();"}]
+                            [{/if}]
                         [{/block}]
                         [{block name="user_checkout_shipping_feedback"}]
                             <ul class="form">
