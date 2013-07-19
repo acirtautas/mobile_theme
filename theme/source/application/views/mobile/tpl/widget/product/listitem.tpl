@@ -4,6 +4,7 @@
 [{oxscript include="js/widgets/oxtriggerform.js" priority=10 }]
 [{oxscript add="$('.wishlist-btn').oxFormTrigger();"}]
 [{block name="widget_product_listitem_line"}]
+[{assign var="product" value=$oView->getBoxProduct()}]
 [{assign var="currency" value=$oView->getActCurrency()}]
 [{if $showMainLink}]
     [{assign var='_productLink' value=$product->getMainLink()}]
@@ -25,7 +26,7 @@
     [{/if}]
     [{if $blShowToBasket}]
         [{oxhasrights ident="TOBASKET"}]
-            <input type="hidden" name="cl" value="[{$oViewConf->getActiveClassName()}]">
+            <input type="hidden" name="cl" value="[{$oViewConf->getTopActiveClassName()}]">
         [{if $owishid}]
             <input type="hidden" name="owishid" value="[{$owishid}]">
         [{/if}]

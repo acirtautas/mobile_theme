@@ -3,7 +3,8 @@
     [{oxscript add="$('.article-list').oxArticleList();"}]
     <ul id="[{$listId}]" class="content media-list article-list" >
         [{foreach from=$products item=_product name=productlist}]
-            <li class="media">[{include file="widget/product/listitem.tpl" product=$_product testid=$listId|cat:"_"|cat:$smarty.foreach.productlist.iteration blDisableToCart=$blDisableToCart}]</li>
+            [{assign var="_sTestId" value=$listId|cat:"_"|cat:$smarty.foreach.productlist.iteration}]
+            <li class="media">[{oxid_include_widget cl="oxwArticleBox" cur=$oViewConf->getActCurrency() _parent=$oView->getClassName() nocookie=1 _navurlparams=$oViewConf->getNavUrlParams() sProductId=$_product->getId() sWidgetType=product sListType=listitem testid=$_sTestId blDisableToCart=$blDisableToCart}]</li>
         [{/foreach}]
     </ul>
 [{/if}]
